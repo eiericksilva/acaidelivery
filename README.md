@@ -1,6 +1,5 @@
-<!-- Cores -->
+# acai_delivery
+Projeto criado para uma açaiteria local.
 
-#2D033B
-#810CA8
-#C147E9
-#E5B8F4
+## Descrição do Projeto
+Projeto criado para uma açaiteria na qual é disponibilizado um menu intuitivo para que o cliente faça a montagem do açaí conferindo o valor durante a montagem e o preço final. Após a montagem do açaí o cliente deve informar a forma de pagamento e confirmar seu endereço de entrega. Todos esses dados devem chegar, já validados, ao funcionário do estabelecimento.
