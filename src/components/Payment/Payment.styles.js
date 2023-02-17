@@ -11,6 +11,7 @@ export const Container = styled.aside`
   form {
     display: flex;
     flex-direction: column;
+    padding-left: 15px;
   }
   .address {
     display: flex;
@@ -39,8 +40,10 @@ export const Container = styled.aside`
 
   .addInfo {
     textarea {
-      width: 300px;
+      width: 80%;
       height: 200px;
+      margin: 10px;
+      font-size: 1.2rem;
     }
   }
 `;

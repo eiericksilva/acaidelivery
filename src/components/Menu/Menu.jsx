@@ -3,9 +3,11 @@ import Button from "../Button/Button";
 import { Container, Wrapper } from "./Menu.styles";
 
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { OrderDataContext } from "../../Providers/OrderData";
 
 const Menu = () => {
-  const [order, setOrder] = useState([]);
+  const { order, setOrder } = useContext(OrderDataContext);
   useEffect(() => {
     console.log(order);
   }, [order]);

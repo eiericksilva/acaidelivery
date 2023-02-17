@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../Button/Button";
 import { Container } from "./Payment.styles";
 import { useForm } from "react-hook-form";
 
+import { useContext } from "react";
+import { OrderDataContext } from "../../Providers/OrderData";
+
 const Payment = () => {
-  const [finalData, setFinalData] = useState([]);
+  const { finalData, setFinalData } = useContext(OrderDataContext);
   const { register, handleSubmit } = useForm();
+  useEffect(() => {
+    console.log(finalData);
+  }, [finalData]);
   const onSubmit = (data) => {
     setFinalData(data);
   };
-  console.log(finalData);
   return (
     <>
       <Container>
