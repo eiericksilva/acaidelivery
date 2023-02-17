@@ -5,11 +5,12 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        border: 1px solid blue;
+        /* border: 1px solid blue; */
     }
 
     body, html {
         font-family: 'Poppins', sans-serif;
+        color: #2D033B;
     }
 
     h1 {
@@ -18,7 +19,6 @@ const GlobalStyle = createGlobalStyle`
     
     h2, h3, h4 {
         font-weight: 500;
-        
     }
 
     input {

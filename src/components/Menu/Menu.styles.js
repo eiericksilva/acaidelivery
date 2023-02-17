@@ -6,6 +6,12 @@ export const Container = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: pink;
+  border-radius: 0 0 10% 10%;
+
+  padding: 50px 70px;
+
+  margin-bottom: 40px;
 `;
 
 export const Wrapper = styled.div`
@@ -15,5 +21,17 @@ export const Wrapper = styled.div`
   .size {
     display: flex;
     flex-direction: column;
+  }
+
+  div.final_value {
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      font-size: 2rem;
+      font-weight: 700;
+    }
   }
 `;
