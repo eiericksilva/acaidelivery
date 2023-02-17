@@ -1,0 +1,25 @@
+{
+    "size":[
+        {"300ml":"12,00"},
+        {"700ml":"15,00"},
+        {"1L":"18,00"}
+    ],
+    "garnish":[
+        "Banana",
+        "Leite em Pó",
+        "Granola",
+        "Gotas de Chocolate",
+        "Choco-Ball",
+        "Cobertura de chocolate",
+        "Cobertura de Morango",
+        "Mousse de maracujá",
+        "Mousse de morango"
+    ],
+    "additional":{
+        "Nutella":"4.00",
+        "Oreo":"2.00",
+        "Bis":"2.00",
+        "Kit-Kat":"2.00",
+        "Paçoca":"1.00"
+    }
+}
