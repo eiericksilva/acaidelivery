@@ -36,4 +36,11 @@ export const Container = styled.aside`
       padding: 10px;
     }
   }
+
+  .addInfo {
+    textarea {
+      width: 300px;
+      height: 200px;
+    }
+  }
 `;
