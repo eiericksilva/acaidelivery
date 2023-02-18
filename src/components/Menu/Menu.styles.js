@@ -6,7 +6,7 @@ export const Container = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: pink;
+  background-color: #fce0e4;
   border-radius: 0 0 10% 10%;
 
   padding: 50px 70px;

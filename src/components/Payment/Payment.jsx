@@ -55,6 +55,17 @@ const Payment = () => {
                 Dinheiro
               </label>
             </div>
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="payment_form"
+                  value="Pix"
+                  {...register("Forma de pagamento")}
+                />
+                Pix
+              </label>
+            </div>
           </div>
           <div className="addInfo">
             <textarea
@@ -87,6 +98,14 @@ const Payment = () => {
                 placeholder="Rua"
                 name="Rua"
                 {...register("Rua")}
+              />
+            </label>
+            <label>
+              <input
+                type="text"
+                placeholder="Número"
+                name="Rua"
+                {...register("Número")}
               />
             </label>
             <label>
