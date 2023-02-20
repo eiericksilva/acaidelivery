@@ -7,11 +7,7 @@ export const Container = styled.section`
   flex-direction: column;
   justify-content: space-between;
   background-color: #fce0e4;
-  border-radius: 0 0 10% 10%;
-
   padding: 50px 70px;
-
-  margin-bottom: 40px;
 `;
 
 export const Wrapper = styled.div`
@@ -24,6 +20,8 @@ export const Wrapper = styled.div`
   }
 
   div.final_value {
+    font-size: 2rem;
+    font-weight: 100;
     padding: 20px 0;
     display: flex;
     align-items: center;
@@ -32,6 +30,7 @@ export const Wrapper = styled.div`
     p {
       font-size: 2rem;
       font-weight: 700;
+      color: #2d033b;
     }
   }
 `;

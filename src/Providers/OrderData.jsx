@@ -3,7 +3,10 @@ import React, { createContext, useState } from "react";
 export const OrderDataContext = createContext();
 
 export const OrderDataProvider = ({ children }) => {
-  const [order, setOrder] = useState([]);
+  //dados do pedido
+  const [order, setOrder] = useState({});
+
+  //dados contendo pedido e dados do cliente
   const [finalData, setFinalData] = useState([]);
 
   return (

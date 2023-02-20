@@ -7,14 +7,16 @@ import { useContext } from "react";
 import { OrderDataContext } from "../../Providers/OrderData";
 
 const Payment = () => {
-  const { finalData, setFinalData } = useContext(OrderDataContext);
+  const { order, finalData, setFinalData } = useContext(OrderDataContext);
   const { register, handleSubmit } = useForm();
+
+  const onSubmit = (paymentData) => {
+    setFinalData({ order, paymentData });
+  };
+
   useEffect(() => {
     console.log(finalData);
   }, [finalData]);
-  const onSubmit = (data) => {
-    setFinalData(data);
-  };
   return (
     <>
       <Container>

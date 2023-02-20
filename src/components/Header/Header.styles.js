@@ -9,3 +9,21 @@ export const Container = styled.header`
     font-style: italic;
   }
 `;
+
+export const ContainerImage = styled.div`
+  display: flex;
+  justify-content: space-around;
+  min-height: 300px;
+  padding: 20px;
+
+  div {
+    width: 200px;
+    background-color: yellow;
+    border-radius: 15px;
+    text-align: center;
+    color: #000;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+`;
