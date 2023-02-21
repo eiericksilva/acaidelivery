@@ -11,10 +11,11 @@ const Payment = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (paymentData) => {
-    setFinalData({ order, paymentData });
+    setFinalData(paymentData);
   };
 
   useEffect(() => {
+    console.log("___FINALDATA___");
     console.log(finalData);
   }, [finalData]);
   return (

@@ -4,6 +4,8 @@ import { Container, ContainerImage } from "./Header.styles";
 const Header = () => {
   return (
     <Container>
+      <h1>Açaí Delivery</h1>
+      <p>Monte seu açaí e receba no conforto da sua casa</p>
       <ContainerImage>
         <div>
           <h1>Açaí 300ml</h1>
@@ -18,8 +20,6 @@ const Header = () => {
           <p>R$18,00</p>
         </div>
       </ContainerImage>
-      <h1>Açaí Delivery</h1>
-      <p>Monte seu açaí e receba no conforto da sua casa</p>
     </Container>
   );
 };

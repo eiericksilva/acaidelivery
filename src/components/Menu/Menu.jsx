@@ -5,23 +5,23 @@ import { Container, Wrapper } from "./Menu.styles";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { OrderDataContext } from "../../Providers/OrderData";
-import { ValueContext } from "../../Providers/ValueContext";
 
 const Menu = () => {
   const { order, setOrder } = useContext(OrderDataContext);
-  const { sum } = useContext(ValueContext);
 
   const { register, handleSubmit } = useForm({
     mode: "all",
   });
 
   useEffect(() => {
+    console.log("___ORDER___");
     console.log(order);
   }, [order]);
 
   const onSubmit = (newOrder) => {
-    setOrder(newOrder);
+    setOrder([...order, newOrder]);
   };
+
   return (
     <>
       <Container>
@@ -29,34 +29,12 @@ const Menu = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Wrapper>
             <h3>1.1 Escolha o tamanho do açaí</h3>
-            <div name="size" className="size">
-              <label>
-                <input
-                  type="radio"
-                  name="Tamanho"
-                  value="12.00"
-                  {...register("Tamanho")}
-                />
-                300ml
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="Tamanho"
-                  value="15.00"
-                  {...register("Tamanho")}
-                />
-                700ml
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="Tamanho"
-                  value="18.00"
-                  {...register("Tamanho")}
-                />
-                1L
-              </label>
+            <div className="size">
+              <select {...register("Tamanho")}>
+                <option value="300ml">300ml</option>
+                <option value="700ml">700ml</option>
+                <option value="1L">1L</option>
+              </select>
             </div>
           </Wrapper>
           <Wrapper>
@@ -216,7 +194,7 @@ const Menu = () => {
             </div>
             <div className="final_value">
               <h2>Valor Final:</h2>
-              <p>{sum}</p>
+              <p>0.00</p>
             </div>
             <Button type="submit" title="Adicionar Produto" />
           </Wrapper>

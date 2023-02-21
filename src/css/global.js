@@ -96,6 +96,16 @@ const GlobalStyle = createGlobalStyle`
         }
     }
     
+    select {
+       height: 40px;
+       border: 1px solid #2D033B;
+       color:  #2D033B;
+       cursor: pointer;
+       
+       option {
+           background-color:  #FCE0E4;
+       }
+    } 
 `;
 
 export default GlobalStyle;
