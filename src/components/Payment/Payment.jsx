@@ -14,10 +14,6 @@ const Payment = () => {
     setFinalData(paymentData);
   };
 
-  useEffect(() => {
-    console.log("___FINALDATA___");
-    console.log(finalData);
-  }, [finalData]);
   return (
     <>
       <Container>

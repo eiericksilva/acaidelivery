@@ -1,8 +1,17 @@
 {
     "size":[
-        {"300ml":"12,00"},
-        {"700ml":"15,00"},
-        {"1L":"18,00"}
+        {
+            "tamanho": "300ml",
+            "valor":"12,00"
+        },
+        {
+            "tamanho": "700ml",
+            "valor":"15,00"
+        },
+        {
+            "tamanho": "1l",
+            "valor":"18,00"
+        }
     ],
     "garnish":[
         "Banana",
@@ -15,11 +24,27 @@
         "Mousse de maracujá",
         "Mousse de morango"
     ],
-    "additional":{
-        "Nutella":"4.00",
-        "Oreo":"2.00",
-        "Bis":"2.00",
-        "Kit-Kat":"2.00",
-        "Paçoca":"1.00"
-    }
+    "additional":[
+        {
+            "nome": "Nutella",
+            "valor":"4.00"
+        },
+        {
+            "nome": "Oreo",
+            "valor":"2.00"
+        },
+        {
+            "nome": "Bis",
+            "valor":"2.00"
+        },
+        {
+            "nome": "Kit-Kat",
+            "valor":"2.00"
+        },
+        {
+            "nome": "Paçoca",
+            "valor":"1.00"
+        }
+    
+    ]
 }

@@ -5,21 +5,22 @@ import { Container, Wrapper } from "./Menu.styles";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { OrderDataContext } from "../../Providers/OrderData";
+import { FinalPriceContext } from "../../Providers/FinalPriceContext";
+
+import { size, garnish, additional } from "../../../MockMenu.json";
 
 const Menu = () => {
   const { order, setOrder } = useContext(OrderDataContext);
-
-  const { register, handleSubmit } = useForm({
-    mode: "all",
-  });
+  const { sum } = useContext(FinalPriceContext);
+  const { register, handleSubmit } = useForm({ mode: "all" });
 
   useEffect(() => {
-    console.log("___ORDER___");
     console.log(order);
+    const lengthOfGarnish = order.map((item) => item.Acompanhamento.length);
+    console.log(lengthOfGarnish);
   }, [order]);
-
   const onSubmit = (newOrder) => {
-    setOrder([...order, newOrder]);
+    setOrder([newOrder]);
   };
 
   return (
@@ -31,9 +32,9 @@ const Menu = () => {
             <h3>1.1 Escolha o tamanho do açaí</h3>
             <div className="size">
               <select {...register("Tamanho")}>
-                <option value="300ml">300ml</option>
-                <option value="700ml">700ml</option>
-                <option value="1L">1L</option>
+                {size.map((tamanho) => (
+                  <option value={tamanho.valor}>{tamanho.tamanho}</option>
+                ))}
               </select>
             </div>
           </Wrapper>
@@ -44,157 +45,37 @@ const Menu = () => {
               R$1,00
             </p>
             <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="garnish"
-                  value="Banana"
-                  {...register("Acompanhamento")}
-                />
-                Banana
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="garnish"
-                  value="Leite em Pó"
-                  {...register("Acompanhamento")}
-                />
-                Leite em Pó
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="garnish"
-                  value="Granola"
-                  {...register("Acompanhamento")}
-                />
-                Granola
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="garnish"
-                  value="Gotas de Chocolate"
-                  {...register("Acompanhamento")}
-                />
-                Gotas de Chocolate
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="garnish"
-                  value="Choco-Ball"
-                  {...register("Acompanhamento")}
-                />
-                Choco-Ball
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="garnish"
-                  value="Cobertura de chocolate"
-                  {...register("Acompanhamento")}
-                />
-                Cobertura de chocolate
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="garnish"
-                  value="Cobertura de Morango"
-                  {...register("Acompanhamento")}
-                />
-                Cobertura de Morango
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="garnish"
-                  value="Mousse de maracujá"
-                  {...register("Acompanhamento")}
-                />
-                Mousse de maracujá
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="garnish"
-                  value="Mousse de morango"
-                  {...register("Acompanhamento")}
-                />
-                Mousse de morango
-              </label>
+              {garnish.map((acompanhamento) => (
+                <label>
+                  <input
+                    type="checkbox"
+                    name="garnish"
+                    value={acompanhamento}
+                    {...register("Acompanhamento")}
+                  />
+                  {acompanhamento}
+                </label>
+              ))}
             </div>
           </Wrapper>
           <Wrapper>
             <h3>1.3 Agora escolha os adicionais</h3>
             <div className="additional">
-              <label>
-                <input
-                  type="checkbox"
-                  name="additional"
-                  value="Nutella"
-                  {...register("Adicionais")}
-                />
-                Nutella - R$4.00
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="additional"
-                  value="Oreo"
-                  {...register("Adicionais")}
-                />
-                Oreo - R$2.00
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="additional"
-                  value="Bis"
-                  {...register("Adicionais")}
-                />
-                Bis - R$2.00
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="additional"
-                  value="Kit-Kat"
-                  {...register("Adicionais")}
-                />
-                Kit-Kat - R$2.00
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="additional"
-                  value="Paçoca"
-                  {...register("Adicionais")}
-                />
-                Paçoca - R$1.00
-              </label>
+              {additional.map((adicional) => (
+                <label>
+                  <input
+                    type="checkbox"
+                    name="additional"
+                    value={adicional.valor}
+                    {...register("Adicionais")}
+                  />
+                  {`${adicional.nome} - R$${adicional.valor}`}
+                </label>
+              ))}
             </div>
             <div className="final_value">
               <h2>Valor Final:</h2>
-              <p>0.00</p>
+              <p>{sum}</p>
             </div>
             <Button type="submit" title="Adicionar Produto" />
           </Wrapper>
