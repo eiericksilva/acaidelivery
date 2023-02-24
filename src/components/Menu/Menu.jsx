@@ -11,16 +11,45 @@ import { size, garnish, additional } from "../../../MockMenu.json";
 
 const Menu = () => {
   const { order, setOrder } = useContext(OrderDataContext);
-  const { sum } = useContext(FinalPriceContext);
+  const { sum, setSum } = useContext(FinalPriceContext);
   const { register, handleSubmit } = useForm({ mode: "all" });
+
+  /*   const lengthOfGarnish = order.map((item) => item.Acompanhamento.length); */
 
   useEffect(() => {
     console.log(order);
-    const lengthOfGarnish = order.map((item) => item.Acompanhamento.length);
-    console.log(lengthOfGarnish);
   }, [order]);
+
   const onSubmit = (newOrder) => {
-    setOrder([newOrder]);
+    setOrder(newOrder);
+    //somandoAdicionais();
+    //somandoTamanho();
+    //somandoAcompanhamentos();
+  };
+
+  const somandoAdicionais = async () => {
+    const res = order.Adicionais;
+    const numberRes = await res.map((valor) => parseInt(valor));
+    const valorFinalAdicionais = numberRes.reduce((acc, cur) => {
+      return acc + cur;
+    }, 0);
+    setSum(valorFinalAdicionais);
+  };
+
+  const somandoTamanho = () => {
+    const valorFinalTamanho = parseInt(order.Tamanho);
+    setSum(valorFinalTamanho);
+  };
+
+  const somandoAcompanhamentos = () => {
+    let qtdeAcompanhamentoExtra = 0;
+    const qtdeAcompanhamentos = order.Acompanhamento.length;
+    if (qtdeAcompanhamentos <= 5) {
+      qtdeAcompanhamentoExtra = 0;
+    } else {
+      qtdeAcompanhamentoExtra = qtdeAcompanhamentos - 5;
+    }
+    setSum(qtdeAcompanhamentoExtra);
   };
 
   return (

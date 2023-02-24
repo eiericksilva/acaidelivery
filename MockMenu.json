@@ -2,15 +2,15 @@
     "size":[
         {
             "tamanho": "300ml",
-            "valor":"12,00"
+            "valor":12.00
         },
         {
             "tamanho": "700ml",
-            "valor":"15,00"
+            "valor":15.00
         },
         {
-            "tamanho": "1l",
-            "valor":"18,00"
+            "tamanho": "1L",
+            "valor":18.00
         }
     ],
     "garnish":[
@@ -27,23 +27,23 @@
     "additional":[
         {
             "nome": "Nutella",
-            "valor":"4.00"
+            "valor":4.00
         },
         {
             "nome": "Oreo",
-            "valor":"2.00"
+            "valor":2.00
         },
         {
             "nome": "Bis",
-            "valor":"2.00"
+            "valor":2.00
         },
         {
             "nome": "Kit-Kat",
-            "valor":"2.00"
+            "valor":2.00
         },
         {
             "nome": "Paçoca",
-            "valor":"1.00"
+            "valor":1.00
         }
     
     ]
