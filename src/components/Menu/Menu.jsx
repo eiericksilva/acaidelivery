@@ -11,7 +11,12 @@ import { size, garnish, additional } from "../../../MockMenu.json";
 
 const Menu = () => {
   const { order, setOrder } = useContext(OrderDataContext);
-  const { sum, setSum, handleValueSum } = useContext(FinalPriceContext);
+  const { sum, setSum } = useContext(FinalPriceContext);
+
+  const [somandoTamanho, setSomandoTamanho] = useState("");
+  const [somandoAcompanhamentos, setSomandoAcompanhamentos] = useState("");
+  const [somandoAdicionais, setSomandoAdicionais] = useState("");
+
   const { register, handleSubmit } = useForm({
     mode: "all",
   });
@@ -20,30 +25,37 @@ const Menu = () => {
     console.log(order);
   }, [order, sum]);
 
+  useEffect(() => {
+    const sum =
+      Number(somandoTamanho) +
+      Number(somandoAcompanhamentos) +
+      Number(somandoAdicionais);
+
+    setSum(sum);
+  }, [somandoTamanho, somandoAcompanhamentos, somandoAdicionais]);
+
   const onSubmit = (newOrder) => {
     setOrder(newOrder);
-    somandoTamanho();
-    somandoAcompanhamentos();
-    somandoAdicionais();
+    handleTamanho();
+    handleAcompanhamentos();
+    handleAdicionais();
   };
 
-  const somandoTamanho = () => {
-    const valorFinalTamanho = parseInt(order.Tamanho);
-
-    console.log(valorFinalTamanho);
+  const handleTamanho = () => {
+    setSomandoTamanho(parseInt(order.Tamanho));
   };
 
-  const somandoAdicionais = () => {
+  const handleAdicionais = () => {
     const res = order.Adicionais;
     const numberRes = res.map((valor) => parseInt(valor));
     const valorFinalAdicionais = numberRes.reduce((acc, cur) => {
       return acc + cur;
     }, 0);
 
-    console.log(valorFinalAdicionais);
+    setSomandoAdicionais(valorFinalAdicionais);
   };
 
-  const somandoAcompanhamentos = () => {
+  const handleAcompanhamentos = () => {
     let qtdeAcompanhamentoExtra = 0;
     const qtdeAcompanhamentos = order.Acompanhamento.length;
     if (qtdeAcompanhamentos <= 5) {
@@ -52,7 +64,7 @@ const Menu = () => {
       qtdeAcompanhamentoExtra = qtdeAcompanhamentos - 5;
     }
 
-    console.log(qtdeAcompanhamentoExtra);
+    setSomandoAcompanhamentos(qtdeAcompanhamentoExtra);
   };
 
   return (
@@ -109,7 +121,7 @@ const Menu = () => {
             </div>
             <div className="final_value">
               <h2>Valor Final:</h2>
-              <p>{sum}</p>
+              <p>{`R$${sum},00`}</p>
             </div>
             <Button type="submit" title="Adicionar Produto" />
           </Wrapper>
