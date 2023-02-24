@@ -2,48 +2,83 @@
     "size":[
         {
             "tamanho": "300ml",
-            "valor":12.00
+            "valor":12.00,
+            "id":1
         },
         {
             "tamanho": "700ml",
-            "valor":15.00
+            "valor":15.00,
+            "id":2
         },
         {
             "tamanho": "1L",
-            "valor":18.00
+            "valor":18.00,
+            "id":3
         }
     ],
     "garnish":[
-        "Banana",
-        "Leite em Pó",
-        "Granola",
-        "Gotas de Chocolate",
-        "Choco-Ball",
-        "Cobertura de chocolate",
-        "Cobertura de Morango",
-        "Mousse de maracujá",
-        "Mousse de morango"
+        {
+            "nome":"Banana",
+            "id": 9
+        },
+        {
+            "nome":"Leite em Pó",
+            "id": 10
+        },
+        {
+            "nome":"Granola",
+            "id": 11
+        },
+        {
+            "nome":"Gotas de Chocolate",
+            "id": 12
+        },
+        {
+            "nome":"Choco-Ball",
+            "id": 13
+        },
+        {
+            "nome":"Cobertura de chocolate",
+            "id": 14
+        },
+        {
+            "nome":"Cobertura de Morango",
+            "id": 15
+        },
+        {
+            "nome":"Mousse de maracujá",
+            "id": 16
+        },
+        {
+            "nome":"Mousse de morango",
+            "id": 17
+        }
     ],
     "additional":[
         {
             "nome": "Nutella",
-            "valor":4.00
+            "valor":4.00,
+            "id":4
         },
         {
             "nome": "Oreo",
-            "valor":2.00
+            "valor":2.00,
+            "id":5
         },
         {
             "nome": "Bis",
-            "valor":2.00
+            "valor":2.00,
+            "id":6
         },
         {
             "nome": "Kit-Kat",
-            "valor":2.00
+            "valor":2.00,
+            "id":7
         },
         {
             "nome": "Paçoca",
-            "valor":1.00
+            "valor":1.00,
+            "id":8
         }
     
     ]

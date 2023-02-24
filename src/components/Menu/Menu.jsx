@@ -11,34 +11,36 @@ import { size, garnish, additional } from "../../../MockMenu.json";
 
 const Menu = () => {
   const { order, setOrder } = useContext(OrderDataContext);
-  const { sum, setSum } = useContext(FinalPriceContext);
-  const { register, handleSubmit } = useForm({ mode: "all" });
-
-  /*   const lengthOfGarnish = order.map((item) => item.Acompanhamento.length); */
+  const { sum, setSum, handleValueSum } = useContext(FinalPriceContext);
+  const { register, handleSubmit } = useForm({
+    mode: "all",
+  });
 
   useEffect(() => {
     console.log(order);
-  }, [order]);
+  }, [order, sum]);
 
   const onSubmit = (newOrder) => {
     setOrder(newOrder);
-    //somandoAdicionais();
-    //somandoTamanho();
-    //somandoAcompanhamentos();
-  };
-
-  const somandoAdicionais = async () => {
-    const res = order.Adicionais;
-    const numberRes = await res.map((valor) => parseInt(valor));
-    const valorFinalAdicionais = numberRes.reduce((acc, cur) => {
-      return acc + cur;
-    }, 0);
-    setSum(valorFinalAdicionais);
+    somandoTamanho();
+    somandoAcompanhamentos();
+    somandoAdicionais();
   };
 
   const somandoTamanho = () => {
     const valorFinalTamanho = parseInt(order.Tamanho);
-    setSum(valorFinalTamanho);
+
+    console.log(valorFinalTamanho);
+  };
+
+  const somandoAdicionais = () => {
+    const res = order.Adicionais;
+    const numberRes = res.map((valor) => parseInt(valor));
+    const valorFinalAdicionais = numberRes.reduce((acc, cur) => {
+      return acc + cur;
+    }, 0);
+
+    console.log(valorFinalAdicionais);
   };
 
   const somandoAcompanhamentos = () => {
@@ -49,7 +51,8 @@ const Menu = () => {
     } else {
       qtdeAcompanhamentoExtra = qtdeAcompanhamentos - 5;
     }
-    setSum(qtdeAcompanhamentoExtra);
+
+    console.log(qtdeAcompanhamentoExtra);
   };
 
   return (
@@ -62,7 +65,9 @@ const Menu = () => {
             <div className="size">
               <select {...register("Tamanho")}>
                 {size.map((tamanho) => (
-                  <option value={tamanho.valor}>{tamanho.tamanho}</option>
+                  <option key={tamanho.id} value={tamanho.valor}>
+                    {tamanho.tamanho}
+                  </option>
                 ))}
               </select>
             </div>
@@ -75,14 +80,14 @@ const Menu = () => {
             </p>
             <div>
               {garnish.map((acompanhamento) => (
-                <label>
+                <label key={acompanhamento.id}>
                   <input
                     type="checkbox"
                     name="garnish"
-                    value={acompanhamento}
+                    value={acompanhamento.nome}
                     {...register("Acompanhamento")}
                   />
-                  {acompanhamento}
+                  {acompanhamento.nome}
                 </label>
               ))}
             </div>
@@ -91,7 +96,7 @@ const Menu = () => {
             <h3>1.3 Agora escolha os adicionais</h3>
             <div className="additional">
               {additional.map((adicional) => (
-                <label>
+                <label key={adicional.id}>
                   <input
                     type="checkbox"
                     name="additional"
@@ -113,7 +118,7 @@ const Menu = () => {
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path
           fill="#FCE0E4"
-          fill-opacity="1"
+          fillOpacity="1"
           d="M0,128L48,122.7C96,117,192,107,288,133.3C384,160,480,224,576,224C672,224,768,160,864,133.3C960,107,1056,117,1152,144C1248,171,1344,213,1392,234.7L1440,256L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
         ></path>
       </svg>
