@@ -34,7 +34,17 @@ const Menu = () => {
   };
 
   const handleTamanho = () => {
-    setSomandoTamanho(parseInt(order.Tamanho));
+    const res = order.Tamanho;
+    if (!res) return;
+
+    const nomes = [];
+    const numeros = [];
+
+    const [nome, numero] = res.split("|");
+    nomes.push(nome);
+    numeros.push(parseInt(numero));
+
+    setSomandoTamanho(parseInt(numeros));
   };
   const handleAdicionais = () => {
     const res = order.Adicionais;
@@ -96,7 +106,10 @@ const Menu = () => {
             <div className="size">
               <select {...register("Tamanho")}>
                 {size.map((tamanho) => (
-                  <option key={tamanho.id} value={tamanho.valor}>
+                  <option
+                    key={tamanho.id}
+                    value={`${tamanho.tamanho}|${tamanho.valor}`}
+                  >
                     {tamanho.tamanho}
                   </option>
                 ))}
