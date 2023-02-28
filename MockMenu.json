@@ -16,44 +16,7 @@
             "id":3
         }
     ],
-    "garnish":[
-        {
-            "nome":"Banana",
-            "id": 9
-        },
-        {
-            "nome":"Leite em Pó",
-            "id": 10
-        },
-        {
-            "nome":"Granola",
-            "id": 11
-        },
-        {
-            "nome":"Gotas de Chocolate",
-            "id": 12
-        },
-        {
-            "nome":"Choco-Ball",
-            "id": 13
-        },
-        {
-            "nome":"Cobertura de chocolate",
-            "id": 14
-        },
-        {
-            "nome":"Cobertura de Morango",
-            "id": 15
-        },
-        {
-            "nome":"Mousse de maracujá",
-            "id": 16
-        },
-        {
-            "nome":"Mousse de morango",
-            "id": 17
-        }
-    ],
+
     "additional":[
         {
             "nome": "Nutella",
@@ -79,7 +42,70 @@
             "nome": "Paçoca",
             "valor":1.00,
             "id":8
+        },
+        {
+            "nome": "Morango",
+            "valor":2.00,
+            "id":9
+        },
+        {
+            "nome": "Kiwi",
+            "valor":2.00,
+            "id":10
+        },
+        {
+            "nome": "Leite Condensado",
+            "valor":1.00,
+            "id":11
+        },
+        {
+            "nome": "Disquete",
+            "valor":1.00,
+            "id":12
+        },
+        {
+            "nome": "Ovomaltine",
+            "valor":1.00,
+            "id":13
         }
-    
+    ],
+    "garnish":[
+        {
+            "nome":"Banana",
+            "id": 14
+        },
+        {
+            "nome":"Leite em Pó",
+            "id": 15
+        },
+        {
+            "nome":"Granola",
+            "id": 16
+        },
+        {
+            "nome":"Gotas de Chocolate",
+            "id": 17
+        },
+        {
+            "nome":"Choco-Ball",
+            "id": 18
+        },
+        {
+            "nome":"Cobertura de chocolate",
+            "id": 19
+        },
+        {
+            "nome":"Cobertura de Morango",
+            "id": 20
+        },
+        {
+            "nome":"Mousse de maracujá",
+            "id": 21
+        },
+        {
+            "nome":"Mousse de morango",
+            "id": 22
+        }
     ]
+
 }
