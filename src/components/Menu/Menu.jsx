@@ -41,8 +41,17 @@ const Menu = () => {
 
     if (!res) return;
 
-    const numberRes = res.map((valor) => parseInt(valor));
-    const valorFinalAdicionais = numberRes.reduce((acc, cur) => {
+    const numeros = [];
+    const nomes = [];
+
+    res.map((elemento) => {
+      const [nome, numero] = elemento.split("|");
+      nomes.push(nome);
+      numeros.push(parseInt(numero));
+    });
+
+    /*  */
+    const valorFinalAdicionais = numeros.reduce((acc, cur) => {
       return acc + cur;
     }, 0);
 
@@ -122,7 +131,7 @@ const Menu = () => {
                   <input
                     type="checkbox"
                     name="additional"
-                    value={adicional.valor}
+                    value={`${adicional.nome}|${adicional.valor}`}
                     {...register("Adicionais")}
                   />
                   {`${adicional.nome} - R$${adicional.valor}`}
