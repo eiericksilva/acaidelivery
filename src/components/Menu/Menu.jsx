@@ -5,48 +5,42 @@ import { Container, Wrapper } from "./Menu.styles";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { OrderDataContext } from "../../Providers/OrderData";
-import { FinalPriceContext } from "../../Providers/FinalPriceContext";
 
 import { size, garnish, additional } from "../../../MockMenu.json";
 
 const Menu = () => {
   const { order, setOrder } = useContext(OrderDataContext);
-  const { sum, setSum } = useContext(FinalPriceContext);
 
-  const [somandoTamanho, setSomandoTamanho] = useState("");
-  const [somandoAcompanhamentos, setSomandoAcompanhamentos] = useState("");
-  const [somandoAdicionais, setSomandoAdicionais] = useState("");
+  /* States */
+  const [sum, setSum] = useState(0);
+  const [somandoTamanho, setSomandoTamanho] = useState(0);
+  const [somandoAcompanhamentos, setSomandoAcompanhamentos] = useState(0);
+  const [somandoAdicionais, setSomandoAdicionais] = useState(0);
 
+  /* Hooks libs externas */
   const { register, handleSubmit } = useForm({
     mode: "all",
   });
 
-  useEffect(() => {
-    console.log(order);
-  }, [order, sum]);
-
-  useEffect(() => {
-    const sum =
-      Number(somandoTamanho) +
-      Number(somandoAcompanhamentos) +
-      Number(somandoAdicionais);
-
-    setSum(sum);
-  }, [somandoTamanho, somandoAcompanhamentos, somandoAdicionais]);
-
+  /* Funções auxiliares */
   const onSubmit = (newOrder) => {
     setOrder(newOrder);
+
     handleTamanho();
     handleAcompanhamentos();
     handleAdicionais();
+
+    console.log(order);
   };
 
   const handleTamanho = () => {
     setSomandoTamanho(parseInt(order.Tamanho));
   };
-
   const handleAdicionais = () => {
     const res = order.Adicionais;
+
+    if (!res) return;
+
     const numberRes = res.map((valor) => parseInt(valor));
     const valorFinalAdicionais = numberRes.reduce((acc, cur) => {
       return acc + cur;
@@ -54,18 +48,34 @@ const Menu = () => {
 
     setSomandoAdicionais(valorFinalAdicionais);
   };
-
   const handleAcompanhamentos = () => {
     let qtdeAcompanhamentoExtra = 0;
-    const qtdeAcompanhamentos = order.Acompanhamento.length;
+
+    const qtdeAcompanhamentos = order?.Acompanhamento?.length;
     if (qtdeAcompanhamentos <= 5) {
       qtdeAcompanhamentoExtra = 0;
     } else {
       qtdeAcompanhamentoExtra = qtdeAcompanhamentos - 5;
     }
 
-    setSomandoAcompanhamentos(qtdeAcompanhamentoExtra);
+    setSomandoAcompanhamentos(parseInt(qtdeAcompanhamentoExtra));
   };
+
+  /* Side Effects */
+  useEffect(() => {
+    handleTamanho();
+    handleAcompanhamentos();
+    handleAdicionais();
+  }, [order]);
+
+  useEffect(() => {
+    const sumValues =
+      parseInt(somandoTamanho) +
+      parseInt(somandoAcompanhamentos) +
+      parseInt(somandoAdicionais);
+
+    setSum(sumValues);
+  }, [somandoTamanho, somandoAcompanhamentos, somandoAdicionais]);
 
   return (
     <>
@@ -121,7 +131,7 @@ const Menu = () => {
             </div>
             <div className="final_value">
               <h2>Valor Final:</h2>
-              <p>{`R$${sum},00`}</p>
+              {`R$: ${sum},00`}
             </div>
             <Button type="submit" title="Adicionar Produto" />
           </Wrapper>
