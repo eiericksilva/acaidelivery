@@ -5,12 +5,13 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        border: 1px solid blue;
     }
 
     body, html {
         font-family: 'Poppins', sans-serif;
         color: #2D033B;
-
+        background-color: red;
     }
 
     h1 {
@@ -97,15 +98,16 @@ const GlobalStyle = createGlobalStyle`
     }
     
     select {
-       height: 50px;
-       width: 50%;
-       border: 1px solid #2D033B;
-       color:  #2D033B;
-       cursor: pointer;
-       
-       option {
-           background-color:  #FCE0E4;
-       }
+        height: 50px;
+        width: 100%;
+        border: 1px solid #2D033B;
+        color:  #2D033B;
+        background-color: #FCE0E4;
+        cursor: pointer;
+        
+        option {
+            background-color:  #FCE0E4;
+        }
     } 
 `;
 

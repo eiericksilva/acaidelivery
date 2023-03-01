@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Button from "../Button/Button";
-import { Container, Wrapper } from "./Menu.styles";
+import { Container, Wrapper, ContainerPayment } from "./Menu.styles";
 
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { OrderDataContext } from "../../Providers/OrderData";
-
 import { size, garnish, additional } from "../../../MockMenu.json";
 
 const Menu = () => {
-  const { order, setOrder } = useContext(OrderDataContext);
-
   /* States */
   const [sum, setSum] = useState(0);
   const [somandoTamanho, setSomandoTamanho] = useState(0);
   const [somandoAcompanhamentos, setSomandoAcompanhamentos] = useState(0);
   const [somandoAdicionais, setSomandoAdicionais] = useState(0);
+  const [step, setStep] = useState("stepAcaiSize");
+  const [buttonIsDisabled, setButtonIsDisabled] = useState(true);
+
+  /*  */
+  const { order, setOrder, finalData, setFinalData } =
+    useContext(OrderDataContext);
 
   /* Hooks libs externas */
   const { register, handleSubmit } = useForm({
@@ -79,6 +82,48 @@ const Menu = () => {
 
     setSomandoAcompanhamentos(parseInt(qtdeAcompanhamentoExtra));
   };
+  const handleBackStepForm = () => {
+    switch (step) {
+      case "stepAcaiSize":
+        setButtonIsDisabled(true);
+        break;
+
+      case "stepGarnish":
+        setStep("stepAcaiSize");
+        break;
+
+      case "stepAdditional":
+        setStep("stepGarnish");
+        break;
+
+      case "stepPayment":
+        setStep("stepAdditional");
+        break;
+    }
+  };
+
+  const handleNextStepForm = () => {
+    switch (step) {
+      case "stepAcaiSize":
+        setStep("stepGarnish");
+        setButtonIsDisabled(false);
+        break;
+
+      case "stepGarnish":
+        setStep("stepAdditional");
+        break;
+
+      case "stepAdditional":
+        setStep("stepPayment");
+        break;
+
+      case "stepPayment":
+        alert("Pedido enviado com sucesso!");
+        setStep("stepAcaiSize");
+        document.location.reload(true);
+        break;
+    }
+  };
 
   /* Side Effects */
   useEffect(() => {
@@ -99,73 +144,190 @@ const Menu = () => {
   return (
     <>
       <Container>
-        <h2>1. Montando seu açaí</h2>
+        {step !== "stepPayment" ? (
+          <h2>1. Montando seu açaí</h2>
+        ) : (
+          <h2>2. Finalizando a compra</h2>
+        )}
         <form onSubmit={handleSubmit(onSubmit)}>
           <Wrapper>
-            <h3>1.1 Escolha o tamanho do açaí</h3>
-            <div className="size">
-              <select {...register("Tamanho")}>
-                {size.map((tamanho) => (
-                  <option
-                    key={tamanho.id}
-                    value={`${tamanho.tamanho}|${tamanho.valor}`}
-                  >
-                    {tamanho.tamanho}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </Wrapper>
-          <Wrapper>
-            <h3>1.2 Agora escolha os acompanhamentos</h3>
-            <p>
-              Você pode escolher até 5, cada acompanhamento extra sairá por
-              R$1,00
-            </p>
-            <div>
-              {garnish.map((acompanhamento) => (
-                <label key={acompanhamento.id}>
-                  <input
-                    type="checkbox"
-                    name="garnish"
-                    value={acompanhamento.nome}
-                    {...register("Acompanhamento")}
+            {step === "stepAcaiSize" && (
+              <div>
+                <h3>1.1 Escolha o tamanho do açaí</h3>
+                <div className="size">
+                  <select {...register("Tamanho")}>
+                    {size.map((tamanho) => (
+                      <option
+                        key={tamanho.id}
+                        value={`${tamanho.tamanho}|${tamanho.valor}`}
+                      >
+                        {tamanho.tamanho} - {`R$:${tamanho.valor},00`}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            )}
+            {step === "stepGarnish" && (
+              <Wrapper>
+                <div>
+                  <h3>1.2 Agora escolha os acompanhamentos</h3>
+                  <p>
+                    Você pode escolher até 5, cada acompanhamento extra sairá
+                    por R$1,00
+                  </p>
+                  <div>
+                    {garnish.map((acompanhamento) => (
+                      <label key={acompanhamento.id}>
+                        <input
+                          type="checkbox"
+                          name="garnish"
+                          value={acompanhamento.nome}
+                          {...register("Acompanhamento")}
+                        />
+                        {acompanhamento.nome}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              </Wrapper>
+            )}
+            {step === "stepAdditional" && (
+              <Wrapper>
+                <h3>1.3 Agora escolha os adicionais</h3>
+                <div className="additional">
+                  {additional.map((adicional) => (
+                    <label key={adicional.id}>
+                      <input
+                        type="checkbox"
+                        name="additional"
+                        value={`${adicional.nome}|${adicional.valor}`}
+                        {...register("Adicionais")}
+                      />
+                      {`${adicional.nome} - R$${adicional.valor}`}
+                    </label>
+                  ))}
+                </div>
+                <Button type="submit" title="Confirmar escolhas" />
+              </Wrapper>
+            )}
+            {step === "stepPayment" && (
+              <ContainerPayment>
+                <h3>2.1 Informe a forma de pagamento:</h3>
+                <div className="payment_form">
+                  <div>
+                    <label>
+                      <input
+                        type="radio"
+                        name="payment_form"
+                        value="Cartão de Crédito"
+                        {...register("Forma de pagamento")}
+                      />
+                      Cartão de Crédito
+                    </label>
+                  </div>
+                  <div>
+                    <label>
+                      <input
+                        type="radio"
+                        name="payment_form"
+                        value="Cartão de Débito"
+                        {...register("Forma de pagamento")}
+                      />
+                      Cartão de Débito
+                    </label>
+                  </div>
+                  <div>
+                    <label>
+                      <input
+                        type="radio"
+                        name="payment_form"
+                        value="Dinheiro"
+                        {...register("Forma de pagamento")}
+                      />
+                      Dinheiro
+                    </label>
+                  </div>
+                  <div>
+                    <label>
+                      <input
+                        type="radio"
+                        name="payment_form"
+                        value="Pix"
+                        {...register("Forma de pagamento")}
+                      />
+                      Pix
+                    </label>
+                  </div>
+                </div>
+                <div className="addInfo">
+                  <textarea
+                    name="addInfo"
+                    placeholder="Deseja informar alguma informação extra? ex.: Preciso de troco para R$50,00"
+                    {...register("Informação Adicional")}
                   />
-                  {acompanhamento.nome}
-                </label>
-              ))}
-            </div>
-          </Wrapper>
-          <Wrapper>
-            <h3>1.3 Agora escolha os adicionais</h3>
-            <div className="additional">
-              {additional.map((adicional) => (
-                <label key={adicional.id}>
-                  <input
-                    type="checkbox"
-                    name="additional"
-                    value={`${adicional.nome}|${adicional.valor}`}
-                    {...register("Adicionais")}
-                  />
-                  {`${adicional.nome} - R$${adicional.valor}`}
-                </label>
-              ))}
-            </div>
+                </div>
+                <h3>2.2 Qual o endereço da entrega?</h3>
+                <div className="address">
+                  <label>
+                    <input
+                      type="text"
+                      placeholder="Cidade"
+                      name="Cidade"
+                      {...register("Cidade")}
+                    />
+                  </label>
+                  <label>
+                    <input
+                      type="text"
+                      placeholder="Bairro"
+                      name="Bairro"
+                      {...register("Bairro")}
+                    />
+                  </label>
+                  <label>
+                    <input
+                      type="text"
+                      placeholder="Rua"
+                      name="Rua"
+                      {...register("Rua")}
+                    />
+                  </label>
+                  <label>
+                    <input
+                      type="text"
+                      placeholder="Número"
+                      name="Rua"
+                      {...register("Número")}
+                    />
+                  </label>
+                  <label>
+                    <input
+                      type="text"
+                      placeholder="Ponto de referência"
+                      name="Ponto de referência"
+                      {...register("Ponto de referência")}
+                    />
+                  </label>
+                </div>
+                <Button type="submit" title="Finalizar pedido" />
+              </ContainerPayment>
+            )}
             <div className="final_value">
               <h2>Valor Final:</h2>
-              {`R$: ${sum},00`}
+              <p>{`R$: ${sum},00`}</p>
             </div>
-            <Button type="submit" title="Adicionar Produto" />
+            <div className="containerStepButton">
+              <Button
+                onClick={handleBackStepForm}
+                disabled={buttonIsDisabled}
+                title="BACK"
+              />
+              <Button onClick={handleNextStepForm} title="NEXT" />
+            </div>
           </Wrapper>
         </form>
       </Container>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path
-          fill="#FCE0E4"
-          fillOpacity="1"
-          d="M0,128L48,122.7C96,117,192,107,288,133.3C384,160,480,224,576,224C672,224,768,160,864,133.3C960,107,1056,117,1152,144C1248,171,1344,213,1392,234.7L1440,256L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
-        ></path>
-      </svg>
     </>
   );
 };

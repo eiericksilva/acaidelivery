@@ -1,25 +1,14 @@
 import React from "react";
-import { Container, ContainerImage } from "./Header.styles";
+import { Container } from "./Header.styles";
+import { MdDeliveryDining } from "react-icons/md";
 
 const Header = () => {
   return (
     <Container>
-      <h1>Açaí Delivery</h1>
-      <p>Monte seu açaí e receba no conforto da sua casa</p>
-      <ContainerImage>
-        <div>
-          <h1>Açaí 300ml</h1>
-          <p>R$12,00</p>
-        </div>
-        <div>
-          <h1>Açaí 700ml</h1>
-          <p>R$15,00</p>
-        </div>
-        <div>
-          <h1>Açaí 1L</h1>
-          <p>R$18,00</p>
-        </div>
-      </ContainerImage>
+      <div className="containerIconAndTitle">
+        <MdDeliveryDining size={40} />
+        <h1>Açaí Delivery</h1>
+      </div>
     </Container>
   );
 };

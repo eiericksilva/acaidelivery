@@ -5,17 +5,12 @@ export const BaseButton = styled.button`
   min-width: auto;
   width: 20%;
 
-  margin: 10px 0;
+  margin: 10px;
   padding: 10px;
 
-  background-color: #f5f500;
-  color: #2b061e;
+  background-color: #2b061e;
+  color: #f5f500;
   font-size: 1rem;
   border-radius: 10px;
   cursor: pointer;
-
-  &:hover {
-    background-color: #2b061e;
-    color: #f5f500;
-  }
 `;

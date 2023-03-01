@@ -4,26 +4,15 @@ export const Container = styled.header`
   width: 100%;
   background-color: #2d033b;
   color: #e5b8f4;
+  position: fixed;
+  top: 0;
 
-  p {
-    font-style: italic;
-  }
-`;
-
-export const ContainerImage = styled.div`
-  display: flex;
-  justify-content: space-around;
-  min-height: 300px;
-  padding: 20px;
-
-  div {
-    width: 200px;
-    background-color: yellow;
-    border-radius: 15px;
-    text-align: center;
-    color: #000;
-    justify-content: center;
+  .containerIconAndTitle {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: start;
+    gap: 10px;
+    margin-left: 10px;
+    align-items: center;
   }
 `;
