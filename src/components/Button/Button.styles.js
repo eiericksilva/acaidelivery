@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const BaseButton = styled.button`
   min-height: 30px;
-  min-width: auto;
-  width: 20%;
+  width: auto;
+  min-width: 100px;
 
   margin: 10px;
   padding: 10px;
@@ -13,4 +13,8 @@ export const BaseButton = styled.button`
   font-size: 1rem;
   border-radius: 10px;
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 `;

@@ -1,10 +1,10 @@
 import React from "react";
 import { BaseButton } from "./Button.styles";
 
-const Button = ({ title, type, onClick }) => {
+const Button = ({ type, onClick, children }) => {
   return (
     <BaseButton onClick={onClick} type={type}>
-      {title}
+      {children}
     </BaseButton>
   );
 };

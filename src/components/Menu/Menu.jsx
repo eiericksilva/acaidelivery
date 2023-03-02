@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Button from "../Button/Button";
 import { Container, Wrapper, ContainerPayment } from "./Menu.styles";
+import {
+  BsFillArrowRightCircleFill,
+  BsFillArrowLeftCircleFill,
+} from "react-icons/bs";
 
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
@@ -120,7 +124,6 @@ const Menu = () => {
       case "stepPayment":
         alert("Pedido enviado com sucesso!");
         setStep("stepAcaiSize");
-        document.location.reload(true);
         break;
     }
   };
@@ -152,21 +155,23 @@ const Menu = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Wrapper>
             {step === "stepAcaiSize" && (
-              <div>
-                <h3>1.1 Escolha o tamanho do açaí</h3>
-                <div className="size">
-                  <select {...register("Tamanho")}>
-                    {size.map((tamanho) => (
-                      <option
-                        key={tamanho.id}
-                        value={`${tamanho.tamanho}|${tamanho.valor}`}
-                      >
-                        {tamanho.tamanho} - {`R$:${tamanho.valor},00`}
-                      </option>
-                    ))}
-                  </select>
+              <Wrapper>
+                <div>
+                  <h3>1.1 Escolha o tamanho do açaí</h3>
+                  <div className="size">
+                    <select {...register("Tamanho")}>
+                      {size.map((tamanho) => (
+                        <option
+                          key={tamanho.id}
+                          value={`${tamanho.tamanho}|${tamanho.valor}`}
+                        >
+                          {tamanho.tamanho} - {`R$${tamanho.valor},00`}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
-              </div>
+              </Wrapper>
             )}
             {step === "stepGarnish" && (
               <Wrapper>
@@ -208,7 +213,6 @@ const Menu = () => {
                     </label>
                   ))}
                 </div>
-                <Button type="submit" title="Confirmar escolhas" />
               </Wrapper>
             )}
             {step === "stepPayment" && (
@@ -310,7 +314,6 @@ const Menu = () => {
                     />
                   </label>
                 </div>
-                <Button type="submit" title="Finalizar pedido" />
               </ContainerPayment>
             )}
             <div className="final_value">
@@ -318,12 +321,14 @@ const Menu = () => {
               <p>{`R$: ${sum},00`}</p>
             </div>
             <div className="containerStepButton">
-              <Button
-                onClick={handleBackStepForm}
-                disabled={buttonIsDisabled}
-                title="BACK"
-              />
-              <Button onClick={handleNextStepForm} title="NEXT" />
+              <Button onClick={handleBackStepForm} disabled={buttonIsDisabled}>
+                <BsFillArrowLeftCircleFill size={20} />
+                BACK
+              </Button>
+              <Button onClick={handleNextStepForm}>
+                NEXT
+                <BsFillArrowRightCircleFill size={20} />
+              </Button>
             </div>
           </Wrapper>
         </form>

@@ -1,19 +1,18 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: #fce0e4;
-  padding-top: 100px;
+  margin: 10px auto;
 `;
 
 export const Wrapper = styled.div`
   width: 100%;
   min-height: 100vh;
-  padding: 15px;
+  margin: 10px auto;
 
   .size {
     display: flex;
@@ -44,14 +43,11 @@ export const Wrapper = styled.div`
 
 export const ContainerPayment = styled.aside`
   width: 100%;
-  padding: 10px;
-
   margin-bottom: 40px;
 
   .address {
     display: flex;
     flex-direction: column;
-    padding: 10px;
 
     label {
       margin: 0.2rem;
@@ -81,8 +77,9 @@ export const ContainerPayment = styled.aside`
   .addInfo {
     textarea {
       width: 100%;
+      margin: 10px 0;
       height: 200px;
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
   }
 `;

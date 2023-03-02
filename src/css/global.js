@@ -5,13 +5,12 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        border: 1px solid blue;
     }
 
     body, html {
         font-family: 'Poppins', sans-serif;
         color: #2D033B;
-        background-color: red;
+        height: auto;
     }
 
     h1 {
