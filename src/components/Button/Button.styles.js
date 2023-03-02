@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const BaseButton = styled.button`
   min-height: 30px;
   width: auto;
-  min-width: 100px;
+  min-width: 200px;
 
   margin: 10px;
   padding: 10px;

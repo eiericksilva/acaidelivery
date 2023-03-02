@@ -2,17 +2,29 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 50%;
+  min-width: 615px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #fce0e4;
   margin: 10px auto;
+  padding: 10px;
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+  background-color: #2d033b;
+  min-height: 500px;
+
+  h2 {
+    color: #fce0e4;
+  }
 `;
 
 export const Wrapper = styled.div`
   width: 100%;
-  min-height: 100vh;
+  min-height: 300px;
   margin: 10px auto;
+  background-color: pink;
+  border-radius: 15px;
+  padding: 10px;
 
   .size {
     display: flex;

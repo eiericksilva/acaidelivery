@@ -12,32 +12,24 @@ import { OrderDataContext } from "../../Providers/OrderData";
 import { size, garnish, additional } from "../../../MockMenu.json";
 
 const Menu = () => {
-  /* States */
   const [sum, setSum] = useState(0);
   const [somandoTamanho, setSomandoTamanho] = useState(0);
   const [somandoAcompanhamentos, setSomandoAcompanhamentos] = useState(0);
   const [somandoAdicionais, setSomandoAdicionais] = useState(0);
   const [step, setStep] = useState("stepAcaiSize");
-  const [buttonIsDisabled, setButtonIsDisabled] = useState(true);
 
-  /*  */
-  const { order, setOrder, finalData, setFinalData } =
-    useContext(OrderDataContext);
+  const { order, setOrder } = useContext(OrderDataContext);
 
-  /* Hooks libs externas */
   const { register, handleSubmit } = useForm({
     mode: "all",
   });
 
-  /* Funções auxiliares */
   const onSubmit = (newOrder) => {
     setOrder(newOrder);
 
     handleTamanho();
     handleAcompanhamentos();
     handleAdicionais();
-
-    console.log(order);
   };
 
   const handleTamanho = () => {
@@ -89,7 +81,6 @@ const Menu = () => {
   const handleBackStepForm = () => {
     switch (step) {
       case "stepAcaiSize":
-        setButtonIsDisabled(true);
         break;
 
       case "stepGarnish":
@@ -110,7 +101,6 @@ const Menu = () => {
     switch (step) {
       case "stepAcaiSize":
         setStep("stepGarnish");
-        setButtonIsDisabled(false);
         break;
 
       case "stepGarnish":
@@ -128,11 +118,11 @@ const Menu = () => {
     }
   };
 
-  /* Side Effects */
   useEffect(() => {
     handleTamanho();
     handleAcompanhamentos();
     handleAdicionais();
+    console.log(order);
   }, [order]);
 
   useEffect(() => {
@@ -177,10 +167,10 @@ const Menu = () => {
               <Wrapper>
                 <div>
                   <h3>1.2 Agora escolha os acompanhamentos</h3>
-                  <p>
+                  <small>
                     Você pode escolher até 5, cada acompanhamento extra sairá
                     por R$1,00
-                  </p>
+                  </small>
                   <div>
                     {garnish.map((acompanhamento) => (
                       <label key={acompanhamento.id}>
@@ -317,18 +307,25 @@ const Menu = () => {
               </ContainerPayment>
             )}
             <div className="final_value">
-              <h2>Valor Final:</h2>
+              <h1>Valor Final:</h1>
               <p>{`R$: ${sum},00`}</p>
             </div>
             <div className="containerStepButton">
-              <Button onClick={handleBackStepForm} disabled={buttonIsDisabled}>
+              <Button onClick={handleBackStepForm}>
                 <BsFillArrowLeftCircleFill size={20} />
-                BACK
+                VOLTAR
               </Button>
-              <Button onClick={handleNextStepForm}>
-                NEXT
-                <BsFillArrowRightCircleFill size={20} />
-              </Button>
+              {step === "stepPayment" ? (
+                <Button onClick={handleNextStepForm}>
+                  ENVIAR PEDIDO
+                  <BsFillArrowRightCircleFill size={20} />
+                </Button>
+              ) : (
+                <Button onClick={handleNextStepForm}>
+                  PRÓXIMO
+                  <BsFillArrowRightCircleFill size={20} />
+                </Button>
+              )}
             </div>
           </Wrapper>
         </form>
