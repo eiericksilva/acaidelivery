@@ -16,11 +16,23 @@ const Menu = () => {
   const [somandoAcompanhamentos, setSomandoAcompanhamentos] = useState(0);
   const [somandoAdicionais, setSomandoAdicionais] = useState(0);
   const [sum, setSum] = useState(0);
+
+  /* Step */
   const [step, setStep] = useState("stepAcaiSize");
+
+  /* Payment */
+  const [paymentForm, setPaymentForm] = useState("");
+  const [adress, setAdress] = useState({
+    city: "",
+    neighborhood: "",
+    street: "",
+    number: "",
+    referencePoint: "",
+  });
 
   const { order, setOrder } = useContext(OrderDataContext);
 
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, reset } = useForm({
     mode: "all",
   });
 
@@ -30,8 +42,30 @@ const Menu = () => {
     handleTamanho();
     handleAcompanhamentos();
     handleAdicionais();
+
+    handleOtherInfo();
   };
 
+  const handleOtherInfo = () => {
+    if (!order) return;
+
+    const formaDePagamento = order.formaDePagamento;
+    const informaçãoAdicional = order.informaçãoAdicional;
+    const cidade = order.cidade;
+    const bairro = order.bairro;
+    const rua = order.rua;
+    const numero = order.numero;
+    const pontoDeReferencia = order.pontoDeReferencia;
+
+    setPaymentForm(formaDePagamento);
+    setAdress({
+      city: cidade,
+      neighborhood: bairro,
+      street: rua,
+      number: numero,
+      referencePoint: pontoDeReferencia,
+    });
+  };
   const handleTamanho = () => {
     if (!order) return;
 
@@ -115,6 +149,8 @@ const Menu = () => {
 
       case "stepPayment":
         alert("Pedido enviado com sucesso!");
+        setSum(0);
+        reset();
         setStep("stepAcaiSize");
         break;
     }
@@ -126,7 +162,6 @@ const Menu = () => {
     handleAdicionais();
 
     console.log(order);
-    console.log(somandoTamanho, somandoAcompanhamentos, somandoAdicionais);
   }, [order]);
 
   useEffect(() => {
@@ -142,6 +177,7 @@ const Menu = () => {
       parseInt(somandoAdicionais);
 
     setSum(sumValues);
+    console.log(sumValues);
   }, [somandoTamanho, somandoAcompanhamentos, somandoAdicionais]);
 
   return (
@@ -225,7 +261,7 @@ const Menu = () => {
                         type="radio"
                         name="payment_form"
                         value="Cartão de Crédito"
-                        {...register("Forma de pagamento")}
+                        {...register("formaDePagamento")}
                       />
                       Cartão de Crédito
                     </label>
@@ -236,7 +272,7 @@ const Menu = () => {
                         type="radio"
                         name="payment_form"
                         value="Cartão de Débito"
-                        {...register("Forma de pagamento")}
+                        {...register("formaDePagamento")}
                       />
                       Cartão de Débito
                     </label>
@@ -247,7 +283,7 @@ const Menu = () => {
                         type="radio"
                         name="payment_form"
                         value="Dinheiro"
-                        {...register("Forma de pagamento")}
+                        {...register("formaDePagamento")}
                       />
                       Dinheiro
                     </label>
@@ -258,7 +294,7 @@ const Menu = () => {
                         type="radio"
                         name="payment_form"
                         value="Pix"
-                        {...register("Forma de pagamento")}
+                        {...register("formaDePagamento")}
                       />
                       Pix
                     </label>
@@ -268,7 +304,7 @@ const Menu = () => {
                   <textarea
                     name="addInfo"
                     placeholder="Deseja informar alguma informação extra? ex.: Preciso de troco para R$50,00"
-                    {...register("Informação Adicional")}
+                    {...register("informaçaoAdicional")}
                   />
                 </div>
                 <h3>2.2 Qual o endereço da entrega?</h3>
@@ -277,40 +313,40 @@ const Menu = () => {
                     <input
                       type="text"
                       placeholder="Cidade"
-                      name="Cidade"
-                      {...register("Cidade")}
+                      name="cidade"
+                      {...register("cidade")}
                     />
                   </label>
                   <label>
                     <input
                       type="text"
                       placeholder="Bairro"
-                      name="Bairro"
-                      {...register("Bairro")}
+                      name="bairro"
+                      {...register("bairro")}
                     />
                   </label>
                   <label>
                     <input
                       type="text"
                       placeholder="Rua"
-                      name="Rua"
-                      {...register("Rua")}
+                      name="rua"
+                      {...register("rua")}
                     />
                   </label>
                   <label>
                     <input
                       type="text"
                       placeholder="Número"
-                      name="Rua"
-                      {...register("Número")}
+                      name="numero"
+                      {...register("numero")}
                     />
                   </label>
                   <label>
                     <input
                       type="text"
                       placeholder="Ponto de referência"
-                      name="Ponto de referência"
-                      {...register("Ponto de referência")}
+                      name="pontoDeReferencia"
+                      {...register("pontoDeReferencia")}
                     />
                   </label>
                 </div>
