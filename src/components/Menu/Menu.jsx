@@ -12,10 +12,10 @@ import { OrderDataContext } from "../../Providers/OrderData";
 import { size, garnish, additional } from "../../../MockMenu.json";
 
 const Menu = () => {
-  const [sum, setSum] = useState(0);
   const [somandoTamanho, setSomandoTamanho] = useState(0);
   const [somandoAcompanhamentos, setSomandoAcompanhamentos] = useState(0);
   const [somandoAdicionais, setSomandoAdicionais] = useState(0);
+  const [sum, setSum] = useState(0);
   const [step, setStep] = useState("stepAcaiSize");
 
   const { order, setOrder } = useContext(OrderDataContext);
@@ -33,6 +33,8 @@ const Menu = () => {
   };
 
   const handleTamanho = () => {
+    if (!order) return;
+
     const res = order.Tamanho;
     if (!res) return;
 
@@ -43,10 +45,10 @@ const Menu = () => {
     nomes.push(nome);
     numeros.push(parseInt(numero));
 
-    setSomandoTamanho(parseInt(numeros));
+    setSomandoTamanho(numeros[0]);
   };
   const handleAdicionais = () => {
-    const res = order.Adicionais;
+    const res = order.Adicionais || [];
 
     if (!res) return;
 
@@ -69,7 +71,7 @@ const Menu = () => {
   const handleAcompanhamentos = () => {
     let qtdeAcompanhamentoExtra = 0;
 
-    const qtdeAcompanhamentos = order?.Acompanhamento?.length;
+    const qtdeAcompanhamentos = order?.Acompanhamento?.length || 0;
     if (qtdeAcompanhamentos <= 5) {
       qtdeAcompanhamentoExtra = 0;
     } else {
@@ -122,8 +124,16 @@ const Menu = () => {
     handleTamanho();
     handleAcompanhamentos();
     handleAdicionais();
+
     console.log(order);
+    console.log(somandoTamanho, somandoAcompanhamentos, somandoAdicionais);
   }, [order]);
+
+  useEffect(() => {
+    setSomandoTamanho(0);
+    setSomandoAcompanhamentos(0);
+    setSomandoAdicionais(0);
+  }, []);
 
   useEffect(() => {
     const sumValues =
