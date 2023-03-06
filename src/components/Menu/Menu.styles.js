@@ -1,20 +1,24 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 50%;
-  min-width: 615px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  width: 50%;
+  min-height: 500px;
+
   margin: 10px auto;
   padding: 10px;
   border-radius: 15px;
-  backdrop-filter: blur(5px);
   background-color: #2d033b;
-  min-height: 500px;
 
   h2 {
     color: #fce0e4;
+  }
+
+  @media (max-width: 930px) {
+    width: 90%;
   }
 `;
 
@@ -50,6 +54,11 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 930px) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 `;
 
@@ -80,7 +89,7 @@ export const ContainerPayment = styled.aside`
       padding: 10px;
     }
 
-    @media (max-width: 820px) {
+    @media (max-width: 1260px) {
       display: flex;
       flex-direction: column;
     }
